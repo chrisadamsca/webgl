@@ -6,8 +6,43 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
   <body>
+      <!-- vertex Shader -->
+  <script id="vertex-shader" type="x-shader/x-vertex">
+    #version 300 es
+    precision mediump float;
+
+    uniform mat4 uModelViewMatrix;
+
+    // Supplied vertex position attribute
+    in vec3 aVertexPosition;
+
+    void main(void) {
+      // Simply set the position in clipspace coordinates
+      gl_Position = uModelViewMatrix * vec4(aVertexPosition, 1.0);
+    }
+  </script>
+
+  <!-- fragment Shader -->
+  <script id="fragment-shader" type="x-shader/x-fragment">
+    #version 300 es
+    precision mediump float;
+
+    // Color that is the result of this shader
+    out vec4 fragColor;
+
+    void main(void) {
+      // Set the result as red
+      fragColor = vec4(1.0, 1.0, 1.0, 1.0);
+    }
+  </script>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>

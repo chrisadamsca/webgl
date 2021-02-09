@@ -3,12 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "jest"
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-webgl-canvas-mock"
+    ]
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "gl-matrix": "^3.3.0",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
@@ -17,6 +25,7 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.20",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.4.0",
@@ -31,6 +40,8 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "^6.2.2",
+    "jest": "^26.6.3",
+    "jest-webgl-canvas-mock": "^0.2.3",
     "prettier": "^1.19.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
