@@ -1,6 +1,6 @@
 import { Color4 } from "@/models/Color4";
 import { WebGLRenderer } from "./webgl-renderer";
-import { GameObject } from '@/models/GameObject';
+import { GameObject } from "@/models/GameObject";
 
 export class TowerClimb {
   private _canvas: HTMLCanvasElement;
@@ -46,12 +46,12 @@ export class TowerClimb {
     this._canvas = document.createElement("canvas");
     const wrapper = document.getElementById(wrapperElementId);
     if (wrapper) wrapper.append(this._canvas);
-    
+
     this._canvas.width = window.innerWidth;
     this._canvas.height = window.innerHeight;
-    window.addEventListener("resize", event => {
+    window.addEventListener("resize", () => {
       this._canvas.width = window.innerWidth;
-      this._canvas.height = window.innerHeight;  
+      this._canvas.height = window.innerHeight;
     });
 
     this.init();
@@ -86,17 +86,9 @@ export class TowerClimb {
   public render() {
     this.initProgram();
 
-    const vertices = [
-      0, 0, 0,
-      0, 0.5, 0,
-      0.5, 0.5, 0,
-      0.5, 0, 0
-    ]
+    const vertices = [0, 0, 0, 0, 0.5, 0, 0.5, 0.5, 0, 0.5, 0, 0];
 
-    const indices = [
-      0, 1, 2,
-      2, 3, 0
-    ];
+    const indices = [0, 1, 2, 2, 3, 0];
 
     const go1 = new GameObject([0, 0, 0], vertices, indices);
 
@@ -107,11 +99,19 @@ export class TowerClimb {
 
   draws(gameObject: GameObject) {
     requestAnimationFrame(() => {
-
       // const translatedVertices = vertices.map(v => v + this.pos);
-      gameObject.move([Math.sin(this.sine += 0.01) / 1000, -Math.cos(this.sine += 0.01) / 1000, 0]);
-      
-      this._renderer.render(gameObject.getVertices(), gameObject.getIndices(), gameObject.getTranslation(), this.program);
+      gameObject.move([
+        Math.sin((this.sine += 0.01)) / 1000,
+        -Math.cos((this.sine += 0.01)) / 1000,
+        0
+      ]);
+
+      this._renderer.render(
+        gameObject.getVertices(),
+        gameObject.getIndices(),
+        gameObject.getTranslation(),
+        this.program
+      );
       this.draws(gameObject);
     });
   }
@@ -163,8 +163,10 @@ export class TowerClimb {
       "aVertexPosition"
     );
 
-    this.program["uModelViewMatrix"] = this.gl.getUniformLocation(this.program, "uModelViewMatrix");
-
+    this.program["uModelViewMatrix"] = this.gl.getUniformLocation(
+      this.program,
+      "uModelViewMatrix"
+    );
   }
 
   public initBuffers() {

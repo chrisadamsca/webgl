@@ -1,4 +1,4 @@
-import { mat4 } from 'gl-matrix';
+import { mat4 } from "gl-matrix";
 
 export class WebGLRenderer {
   private _gl: WebGL2RenderingContext;
@@ -7,8 +7,18 @@ export class WebGLRenderer {
     this._gl = gl;
   }
 
-  public render(vertices: number[], indices: number[], translation: mat4, program: WebGLProgram) {
-    const bufferData = this.initBuffers(vertices, indices, translation, program);
+  public render(
+    vertices: number[],
+    indices: number[],
+    translation: mat4,
+    program: WebGLProgram
+  ) {
+    const bufferData = this.initBuffers(
+      vertices,
+      indices,
+      translation,
+      program
+    );
     this.draw(indices, bufferData);
   }
 

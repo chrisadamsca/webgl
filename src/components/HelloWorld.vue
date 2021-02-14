@@ -13,7 +13,7 @@ export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
 
   mounted() {
-    const game = new TowerClimb("game-container");
+    new TowerClimb("game-container");
   }
 }
 </script>
